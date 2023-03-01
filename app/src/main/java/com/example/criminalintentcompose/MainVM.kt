@@ -10,6 +10,9 @@ class MainVM: ViewModel() {
   val crimes: LiveData<List<Crime>> by lazy {
     generateCrimes()
   }
+
+
+  fun onCrimeClicked(crime: Crime) {}
 }
 
 
