@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="full_date_format" translatable="false">EEE, d MMM, yyyy; HH:mm</string>
+</resources>
