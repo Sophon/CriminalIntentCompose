@@ -1,6 +1,7 @@
 package com.example.criminalintentcompose.ui.screens
 
 import android.text.format.DateFormat
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,8 +15,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.criminalintentcompose.CrimeRouter
 import com.example.criminalintentcompose.MainVM
 import com.example.criminalintentcompose.R
+import com.example.criminalintentcompose.Screen
 import com.example.criminalintentcompose.data.model.Crime
 import java.util.*
 
@@ -24,8 +27,9 @@ fun CrimeDetailScreen(vm: MainVM) {
 
   val crimeEntry: Crime by vm.crimeEntry.observeAsState(Crime())
 
-  //TODO: backpress
-
+  BackHandler {
+    CrimeRouter.navigateTo(Screen.List)
+  }
 
   Scaffold(
     topBar = {}
