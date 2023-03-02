@@ -16,12 +16,12 @@ class MainVM: ViewModel() {
 
   fun onCrimeClicked(crime: Crime) {
     _crimeEntry.value = crime
-    //TODO: navigate to the detail screen
+    CrimeRouter.navigateTo(Screen.Detail)
   }
 
   fun onCreateNewCrime() {
     _crimeEntry.value = Crime()
-    //TODO: navigate to the detail screen
+    CrimeRouter.navigateTo(Screen.Detail)
   }
 
   fun onCrimeChanged(crime: Crime) {
