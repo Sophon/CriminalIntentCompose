@@ -36,7 +36,7 @@ private fun generateCrimes(): LiveData<List<Crime>> {
     crimes.add(
       Crime(
         id = UUID.randomUUID(),
-        title = i.toString(),
+        description = i.toString(),
         date = Date(),
         isSolved = Random().nextBoolean()
       )

@@ -30,7 +30,7 @@ fun CrimeItem(
       .fillMaxWidth()
   ) {
     ListItem(
-      text = { Text(text = crime.title, maxLines = 1) },
+      text = { Text(text = crime.description, maxLines = 1) },
       secondaryText = {
         val formattedDate = DateFormat.format(
           stringResource(id = R.string.full_date_format),
