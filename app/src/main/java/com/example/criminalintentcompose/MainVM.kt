@@ -7,12 +7,26 @@ import com.example.criminalintentcompose.data.model.Crime
 import java.util.*
 
 class MainVM: ViewModel() {
+
   val crimes: LiveData<List<Crime>> by lazy {
     generateCrimes()
   }
+  private var _crimeEntry = MutableLiveData(Crime())
+  var crimeEntry: LiveData<Crime> = _crimeEntry
 
+  fun onCrimeClicked(crime: Crime) {
+    _crimeEntry.value = crime
+    //TODO: navigate to the detail screen
+  }
 
-  fun onCrimeClicked(crime: Crime) {}
+  fun onCreateNewCrime() {
+    _crimeEntry.value = Crime()
+    //TODO: navigate to the detail screen
+  }
+
+  fun onCrimeChanged(crime: Crime) {
+    //TODO: save the note to the DB
+  }
 }
 
 
@@ -22,7 +36,7 @@ private fun generateCrimes(): LiveData<List<Crime>> {
     crimes.add(
       Crime(
         id = UUID.randomUUID(),
-        title = i.toString(),
+        description = i.toString(),
         date = Date(),
         isSolved = Random().nextBoolean()
       )
