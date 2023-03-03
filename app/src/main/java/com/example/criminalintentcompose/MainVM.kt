@@ -14,17 +14,17 @@ class MainVM: ViewModel() {
   private var _crimeEntry = MutableLiveData(Crime())
   var crimeEntry: LiveData<Crime> = _crimeEntry
 
-  fun onCrimeClicked(crime: Crime) {
+  fun goToCrimeDetail(crime: Crime) {
     _crimeEntry.value = crime
     CrimeRouter.navigateTo(Screen.Detail)
   }
 
-  fun onCreateNewCrime() {
+  fun createNewCrime() {
     _crimeEntry.value = Crime()
     CrimeRouter.navigateTo(Screen.Detail)
   }
 
-  fun onCrimeEntryChanged(crime: Crime) {
+  fun crimeEntryChanged(crime: Crime) {
     _crimeEntry.value = crime
   }
 

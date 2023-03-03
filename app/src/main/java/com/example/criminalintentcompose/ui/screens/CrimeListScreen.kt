@@ -29,7 +29,7 @@ fun CrimeListScreen(vm: MainVM) {
     },
     floatingActionButton = {
       FloatingActionButton(
-        onClick = {},
+        onClick = { vm.createNewCrime() },
         contentColor = MaterialTheme.colors.background
       ) {
         Icon(imageVector = Icons.Filled.Add, contentDescription = "Create crime button")
@@ -39,7 +39,7 @@ fun CrimeListScreen(vm: MainVM) {
   ) { padding ->
     CrimeList(
       crimes = crimes,
-      onCrimeClicked = { vm.onCrimeClicked(it) },
+      onCrimeClicked = { vm.goToCrimeDetail(it) },
       modifier = Modifier.padding(padding)
     )
   }

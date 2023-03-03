@@ -48,7 +48,7 @@ fun CrimeDetailScreen(vm: MainVM) {
     CrimeDetail(
       crime = crimeEntry,
       onCrimeChanged = { newCrime ->
-        vm.onCrimeEntryChanged(newCrime)
+        vm.crimeEntryChanged(newCrime)
       },
       modifier = Modifier.padding(padding)
     )
