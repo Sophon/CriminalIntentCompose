@@ -7,10 +7,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,18 +29,26 @@ import java.util.*
 fun CrimeDetailScreen(vm: MainVM) {
 
   val crimeEntry: Crime by vm.crimeEntry.observeAsState(Crime())
+  val isInEditingMode = crimeEntry.isNew().not()
 
   BackHandler {
     CrimeRouter.navigateTo(Screen.List)
   }
 
   Scaffold(
-    topBar = {}
+    topBar = {
+      AppBar(
+        isInEditingMode = isInEditingMode,
+        onBackClick = { CrimeRouter.navigateTo(Screen.List) },
+        onSaveClick = { vm.saveCrime(crimeEntry) },
+        onDeleteClick = { vm.deleteCrime(crimeEntry) }
+      )
+    }
   ) { padding ->
     CrimeDetail(
       crime = crimeEntry,
       onCrimeChanged = { newCrime ->
-        vm.onCrimeChanged(newCrime)
+        vm.onCrimeEntryChanged(newCrime)
       },
       modifier = Modifier.padding(padding)
     )
@@ -96,6 +107,42 @@ private fun CrimeTextField(
   )
 }
 
+@Composable
+private fun AppBar(
+  isInEditingMode: Boolean,
+  onBackClick: () -> Unit,
+  onSaveClick: () -> Unit,
+  onDeleteClick: () -> Unit
+) {
+  TopAppBar(
+    title = {
+      Text(stringResource(R.string.app_name))
+    },
+    navigationIcon = {
+      IconButton(onClick = onBackClick) {
+        Icon(
+          imageVector = Icons.Default.ArrowBack,
+          contentDescription = "Go back button"
+        )
+      }
+    },
+    actions = {
+      IconButton(onClick = onSaveClick, enabled = isInEditingMode) {
+        Icon(
+          imageVector = Icons.Default.Check,
+          contentDescription = "Save button"
+        )
+      }
+      IconButton(onClick = onDeleteClick) {
+        Icon(
+          imageVector = Icons.Default.Delete,
+          contentDescription = "Delete button"
+        )
+      }
+    }
+  )
+}
+
 
 //region PREVIEW
 @Preview
@@ -111,5 +158,11 @@ fun CrimeDetailPreview() {
 @Composable
 fun ContentTextFieldPreview() {
   CrimeTextField(text = "text", label = "label", onTextChange = {})
+}
+
+@Preview
+@Composable
+fun AppBarPreview() {
+  AppBar(false, {}, {}, {})
 }
 //endregion
