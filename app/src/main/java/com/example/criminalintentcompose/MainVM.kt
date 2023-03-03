@@ -24,8 +24,16 @@ class MainVM: ViewModel() {
     CrimeRouter.navigateTo(Screen.Detail)
   }
 
-  fun onCrimeChanged(crime: Crime) {
-    //TODO: save the note to the DB
+  fun onCrimeEntryChanged(crime: Crime) {
+    _crimeEntry.value = crime
+  }
+
+  fun saveCrime(crime: Crime) {
+    //TODO: save to the DB
+  }
+
+  fun deleteCrime(crime: Crime) {
+    //TODO: delete from the DB
   }
 }
 
